@@ -1,3 +1,5 @@
+from time import timezone
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -62,3 +64,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# class Image(models.Model):
+#     name = models.CharField(max_length=255)
+#     image = VersatileImageField(
+#         'Image',
+#         upload_to='images/',
+#         ppoi_field='image_ppoi'
+#     )
+#     image_ppoi = PPOIField()
+#
+#     def __str__(self):
+#         return self.name
