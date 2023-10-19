@@ -1,29 +1,17 @@
+from rest_flex_fields import FlexFieldsModelSerializer
 from .models import Product, Category
-from django.contrib.auth.models import User
-from django.utils.timezone import now
-from rest_framework import serializers
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Category
         fields = ['pk', 'name']
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
-
+class ProductSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Product
-        fields = ['pk', 'name', 'category']
-
-
-class UserSerializer(serializers.ModelSerializer):
-    days_since_joined = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-
-    @staticmethod
-    def get_days_since_joined(obj):
-        return (now() - obj.date_joined).days
+        fields = ['pk', 'name', 'content', 'created', 'updated']
+        expandable_fields = {
+          'category': (CategorySerializer, {'many': True})
+        }
