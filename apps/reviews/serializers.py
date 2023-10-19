@@ -24,5 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
 
-    def get_days_since_joined(self, obj):
+    @staticmethod
+    def get_days_since_joined(obj):
         return (now() - obj.date_joined).days
