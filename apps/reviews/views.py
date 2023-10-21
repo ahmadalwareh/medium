@@ -9,6 +9,7 @@ class ProductViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
     serializer_class = ProductSerializer
     permit_list_expands = ['category', 'sites', 'comments', 'sites.company', 'sites.productsize']
+    filterset_fields = ('category',)
 
     def get_queryset(self):
         queryset = Product.objects.all()
