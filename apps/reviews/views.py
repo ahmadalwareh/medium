@@ -1,21 +1,31 @@
-from rest_framework.decorators import action
-from rest_framework.viewsets import ReadOnlyModelViewSet
 from .serializers import ProductSerializer
 from .models import Product
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_flex_fields.views import FlexFieldsMixin
+from rest_flex_fields import is_expanded
 
 
-class ProductViewSet(ReadOnlyModelViewSet):
+class ProductViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
+
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    permit_list_expands = ['category', 'sites', 'comments', 'sites.company', 'sites.productsize']
 
-    @action(detail=False)
-    def get_list(self, request):
-        pass
+    def get_queryset(self):
+        queryset = Product.objects.all()
 
-    @action(detail=True)
-    def get_product(self, request, pk=None):
-        pass
+        if is_expanded(self.request, 'category'):
+            queryset = queryset.prefetch_related('category')
 
-    @action(detail=True, methods=['post', 'delete'])
-    def delete_product(self, request, pk=None):
-        pass
+        if is_expanded(self.request, 'comments'):
+            queryset = queryset.prefetch_related('comments')
+
+        if is_expanded(self.request, 'sites'):
+            queryset = queryset.prefetch_related('sites')
+
+        if is_expanded(self.request, 'company'):
+            queryset = queryset.prefetch_related('sites__company')
+
+        if is_expanded(self.request, 'productsize'):
+            queryset = queryset.prefetch_related('sites__productsize')
+
+        return queryset
