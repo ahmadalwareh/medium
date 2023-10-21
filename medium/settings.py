@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_filters",
+    "versatileimagefield",
     "apps.reviews",
 ]
 
@@ -128,4 +130,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+    'product_headshot': [
+        ('full_size', 'url'),
+        ('thumbnail', 'thumbnail__100x100'),
+        ('medium_square_crop', 'crop__400x400'),
+        ('small_square_crop', 'crop__50x50')
+    ]
 }
