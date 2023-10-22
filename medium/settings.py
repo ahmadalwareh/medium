@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_filters",
     "versatileimagefield",
     "apps.reviews",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "medium.urls"
@@ -144,3 +146,6 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
         ('small_square_crop', 'crop__50x50')
     ]
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
