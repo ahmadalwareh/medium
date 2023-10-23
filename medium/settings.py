@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "versatileimagefield",
     "apps.reviews",
     "corsheaders",
+    "apps.auth_app",
 ]
 
 MIDDLEWARE = [
