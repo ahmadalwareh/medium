@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "apps.reviews",
     "corsheaders",
     "apps.auth_app",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 MIDDLEWARE = [
