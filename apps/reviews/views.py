@@ -38,4 +38,3 @@ class ImageViewSet(FlexFieldsModelViewSet):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
     permission_classes = [IsAuthenticated]
-

@@ -13,7 +13,6 @@ from .serializers import (MyTokenObtainPairSerializer, RegisterSerializer,
                           ChangePasswordSerializer, UpdateUserSerializer)
 
 
-
 class ObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
